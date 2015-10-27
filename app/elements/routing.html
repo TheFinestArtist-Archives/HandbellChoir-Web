@@ -33,6 +33,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.route = 'submit-play';
     });
 
+    page('/getCode', scrollToTop, function() {
+      app.route = 'get-code';
+    });
+
     page('*', function() {
       page.redirect('/playByPlay');
     });

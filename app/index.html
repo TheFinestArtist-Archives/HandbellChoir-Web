@@ -54,6 +54,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <iron-icon icon="add"></iron-icon>
               <span>Submit Play</span>
             </a>
+
+            <a data-route="get-code" href="getCode" on-tap="onDataRouteClick">
+              <iron-icon icon="code"></iron-icon>
+              <span>Get the Code</span>
+            </a>
           </paper-menu>
         </paper-scroll-header-panel>
 
@@ -125,7 +130,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                       <paper-button class="self-end" on-tap="submitPlay">Submit Play</paper-button>
                     </div>
+                  </paper-material>
                 </template>
+              </section>
+
+              <section data-route="get-code">
+                <paper-material elevation="1">
+                  <h2 class="page-title">Get the Code</h2>
+                  <p>
+                    The code is available at
+                    <a href="https://github.com/jeffposnick/polymer-starter-kit/tree/firebase-demo">https://github.com/jeffposnick/polymer-starter-kit/tree/firebase-demo</a>
+                  </p>
+                  <p>Make sure you switch to the <code>firebase-demo</code> branch!</p>
+                  <p>
+                    A downloadable archive is at
+                    <a href="https://github.com/jeffposnick/polymer-starter-kit/archive/firebase-demo.zip">https://github.com/jeffposnick/polymer-starter-kit/archive/firebase-demo.zip</a>
+                  </p>
                 </paper-material>
               </section>
             </iron-pages>
