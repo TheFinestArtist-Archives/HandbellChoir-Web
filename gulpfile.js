@@ -23,6 +23,7 @@ var glob = require('glob');
 var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
+var ghPages = require('gh-pages');
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -286,6 +287,10 @@ gulp.task('default', ['clean'], function (cb) {
 // Load tasks for web-component-tester
 // Adds tasks for `gulp test:local` and `gulp test:remote`
 require('web-component-tester').gulp.init(gulp);
+
+gulp.task('gh-pages', ['default'], function(callback) {
+  ghPages.publish(path.join(__dirname, 'dist'), callback);
+});
 
 // Load custom tasks from the `tasks` directory
 try { require('require-dir')('tasks'); } catch (err) {}

@@ -22,28 +22,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       next();
     }
 
+    page.base(window.location.pathname.replace(/\/$/, ''));
+
     // Routes
-    page('/', scrollToTop, function() {
-      app.route = 'home';
+    page('/playByPlay', scrollToTop, function() {
+      app.route = 'play-by-play';
     });
 
-    page('/users', scrollToTop, function() {
-      app.route = 'users';
-    });
-
-    page('/users/:name', scrollToTop, function(data) {
-      app.route = 'user-info';
-      app.params = data.params;
-    });
-
-    page('/contact', scrollToTop, function() {
-      app.route = 'contact';
+    page('/submitPlay', scrollToTop, function() {
+      app.route = 'submit-play';
     });
 
     page('*', function() {
-      app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to Home Page';
-      app.$.toast.show();
-      page.redirect('/');
+      page.redirect('/playByPlay');
     });
 
     // add #! before urls
