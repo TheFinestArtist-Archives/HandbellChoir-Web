@@ -83,7 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="layout vertical">
                       <paper-icon-item>
                         <iron-icon src="[[play.icon]]" item-icon></iron-icon>
-                        <span>[[play.note]][[play.play]]</span>
+                        <span>[[play.t]] [[play.n]] [[play.i]]</span>
                       </paper-icon-item>
                     </div>
                   </template>
@@ -96,6 +96,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </firebase-collection>
                 <firebase-collection location="https://handbellchoir.firebaseio.com/config/octaves"
                                      data="{{octaves}}">
+                </firebase-collection>
+                <firebase-collection location="https://handbellchoir.firebaseio.com/config/instruments"
+                                     data="{{instruments}}">
                 </firebase-collection>
                 <paper-material elevation="1" class="layout horizontal">
                   <div class="flex layout vertical">
@@ -110,6 +113,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       <paper-menu class="dropdown-content">
                         <template is="dom-repeat" items="[[octaves]]" as="octave">
                           <paper-item>[[octave.value]]</paper-item>
+                        </template>
+                      </paper-menu>
+                    </paper-dropdown-menu>
+                    <paper-dropdown-menu label="Instrument" selected-item-label="{{selectedInstrument}}">
+                      <paper-menu class="dropdown-content">
+                        <template is="dom-repeat" items="[[instruments]]" as="instrument">
+                          <paper-item>[[instrument.value]]</paper-item>
                         </template>
                       </paper-menu>
                     </paper-dropdown-menu>
