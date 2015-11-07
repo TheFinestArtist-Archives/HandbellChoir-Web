@@ -45,19 +45,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </paper-toolbar>
 
           <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
-            <a data-route="play-by-play" href="playByPlay" on-tap="onDataRouteClick">
+            <a data-route="listen" href="listen" on-tap="onDataRouteClick">
               <iron-icon icon="track-changes"></iron-icon>
-              <span>Live Play-by-Play</span>
+              <span>Listen</span>
             </a>
 
-            <a data-route="submit-play" href="submitPlay" on-tap="onDataRouteClick">
+            <a data-route="ring-bell" href="ringBell" on-tap="onDataRouteClick">
               <iron-icon icon="add"></iron-icon>
-              <span>Submit Play</span>
-            </a>
-
-            <a data-route="get-code" href="getCode" on-tap="onDataRouteClick">
-              <iron-icon icon="code"></iron-icon>
-              <span>Get the Code</span>
+              <span>Ring Bell</span>
             </a>
           </paper-menu>
         </paper-scroll-header-panel>
@@ -75,12 +70,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <div class="content">
             <iron-pages attr-for-selected="data-route" selected="{{route}}">
-              <section data-route="play-by-play">
+              <section data-route="listen">
                 <paper-material elevation="1">
-                  <h2 class="page-title">Play-by-Play</h2>
+                  <h2 class="page-title">Listen</h2>
 
                   <firebase-collection id="firebase-plays"
-                                       location="https://ws-play-by-play.firebaseio.com/plays"
+                                       location="https://handbellchoir.firebaseio.com/plays"
                                        data="{{plays}}">
                   </firebase-collection>
 
@@ -88,65 +83,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="layout vertical">
                       <paper-icon-item>
                         <iron-icon src="[[play.icon]]" item-icon></iron-icon>
-                        <span>[[play.play]]</span>
+                        <span>[[play.note]][[play.play]]</span>
                       </paper-icon-item>
                     </div>
                   </template>
                 </paper-material>
               </section>
 
-              <section data-route="submit-play">
-                <firebase-collection location="https://ws-play-by-play.firebaseio.com/config/teams"
-                                     data="{{teams}}">
+              <section data-route="ring-bell">
+                <firebase-collection location="https://handbellchoir.firebaseio.com/config/notes"
+                                     data="{{notes}}">
                 </firebase-collection>
-                <firebase-collection location="https://ws-play-by-play.firebaseio.com/config/actions"
-                                     data="{{actions}}">
-                </firebase-collection>
+                <paper-material elevation="1" class="layout horizontal">
+                  <div class="flex layout vertical">
+                    <paper-dropdown-menu label="Notes" selected-item-label="{{selectedPlayer}}">
+                      <paper-menu class="dropdown-content">
+                        <template is="dom-repeat" items="[[notes]]" as="note">
+                          <paper-item>[[note]]</paper-item>
+                        </template>
+                      </paper-menu>
+                    </paper-dropdown-menu>
 
-                <template is="dom-repeat" items="[[teams]]" as="team">
-                  <paper-material elevation="1" class="layout horizontal">
-                    <iron-image src="[[team.icon]]"
-                                height="150"
-                                width="150"
-                                sizing="contain">
-                    </iron-image>
-
-                    <div class="flex layout vertical">
-                      <paper-dropdown-menu label="[[team.name]] Player" selected-item-label="{{selectedPlayer}}">
-                        <paper-menu class="dropdown-content">
-                          <template is="dom-repeat" items="[[team.players]]" as="player">
-                            <paper-item>[[player]]</paper-item>
-                          </template>
-                        </paper-menu>
-                      </paper-dropdown-menu>
-
-                      <paper-dropdown-menu label="Outcome" selected-item-label="{{selectedOutcome}}">
-                        <paper-menu class="dropdown-content">
-                          <template is="dom-repeat" items="[[actions]]" as="action">
-                            <paper-item>[[action.value]]</paper-item>
-                          </template>
-                        </paper-menu>
-                      </paper-dropdown-menu>
-
-                      <paper-button class="self-end" on-tap="submitPlay">Submit Play</paper-button>
-                    </div>
-                  </paper-material>
-                </template>
-              </section>
-
-              <section data-route="get-code">
-                <paper-material elevation="1">
-                  <h2 class="page-title">Get the Code</h2>
-                  <p>
-                    The code is available at
-                    <a href="https://github.com/jeffposnick/polymer-starter-kit/tree/firebase-demo">https://github.com/jeffposnick/polymer-starter-kit/tree/firebase-demo</a>
-                  </p>
-                  <p>Make sure you switch to the <code>firebase-demo</code> branch!</p>
-                  <p>
-                    A downloadable archive is at
-                    <a href="https://github.com/jeffposnick/polymer-starter-kit/archive/firebase-demo.zip">https://github.com/jeffposnick/polymer-starter-kit/archive/firebase-demo.zip</a>
-                  </p>
+                    <paper-button class="self-end" on-tap="submitPlay">Ring Bell</paper-button>
+                  </div>
                 </paper-material>
+              </section>
               </section>
             </iron-pages>
           </div>

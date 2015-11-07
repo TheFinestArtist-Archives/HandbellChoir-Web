@@ -25,20 +25,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page.base(window.location.pathname.replace(/\/$/, ''));
 
     // Routes
-    page('/playByPlay', scrollToTop, function() {
-      app.route = 'play-by-play';
+    page('/listen', scrollToTop, function() {
+      app.route = 'listen';
     });
 
-    page('/submitPlay', scrollToTop, function() {
-      app.route = 'submit-play';
-    });
-
-    page('/getCode', scrollToTop, function() {
-      app.route = 'get-code';
+    page('/ringBell', scrollToTop, function() {
+      app.route = 'ring-bell';
     });
 
     page('*', function() {
-      page.redirect('/playByPlay');
+      page.redirect('/listen');
     });
 
     // add #! before urls
