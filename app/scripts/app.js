@@ -25,6 +25,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   };
 
+  var launchTime = new Date().getTime();
+
+  var plays = new Firebase("https://handbellchoir.firebaseio.com/plays");
+  plays.on('child_added', function(play, prevChildKey) {
+    var p = play.val();
+    if (p.t > launchTime) {
+      console.log(p.t, p.n, p.i);
+    }
+  });
+
   // Main area's paper-scroll-header-panel custom condensing transformation of
   // the appName in the middle-container and the bottom title in the bottom-container.
   // The appName is moved to top and shrunk on condensing. The bottom sub title
