@@ -15,11 +15,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
-  app.submitPlay = function(event) {
-    if (event.model.selectedPlayer && event.model.selectedOutcome) {
+  app.ringBell = function(event) {
+    if (app.selectedNote && app.selectedOctave) {
       Polymer.dom(document).querySelector('#firebase-plays').add({
-        icon: event.model.team.icon,
-        play: event.model.selectedPlayer + ' ' + event.model.selectedOutcome + '.'
+        play: app.selectedNote + app.selectedOctave
       });
     }
   };

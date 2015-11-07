@@ -94,17 +94,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <firebase-collection location="https://handbellchoir.firebaseio.com/config/notes"
                                      data="{{notes}}">
                 </firebase-collection>
+                <firebase-collection location="https://handbellchoir.firebaseio.com/config/octaves"
+                                     data="{{octaves}}">
+                </firebase-collection>
                 <paper-material elevation="1" class="layout horizontal">
                   <div class="flex layout vertical">
-                    <paper-dropdown-menu label="Notes" selected-item-label="{{selectedPlayer}}">
+                    <paper-dropdown-menu label="Note" selected-item-label="{{selectedNote}}">
                       <paper-menu class="dropdown-content">
                         <template is="dom-repeat" items="[[notes]]" as="note">
-                          <paper-item>[[note]]</paper-item>
+                          <paper-item>[[note.value]]</paper-item>
+                        </template>
+                      </paper-menu>
+                    </paper-dropdown-menu>
+                    <paper-dropdown-menu label="Octave" selected-item-label="{{selectedOctave}}">
+                      <paper-menu class="dropdown-content">
+                        <template is="dom-repeat" items="[[octaves]]" as="octave">
+                          <paper-item>[[octave.value]]</paper-item>
                         </template>
                       </paper-menu>
                     </paper-dropdown-menu>
 
-                    <paper-button class="self-end" on-tap="submitPlay">Ring Bell</paper-button>
+                    <paper-button class="self-end" on-tap="ringBell">Ring Bell</paper-button>
                   </div>
                 </paper-material>
               </section>
