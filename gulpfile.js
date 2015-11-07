@@ -240,7 +240,8 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
       routes: {
         '/bower_components': 'bower_components'
       }
-    }
+    },
+    ghostMode: false
   });
 
   gulp.watch(['app/**/*.html'], reload);
@@ -269,7 +270,8 @@ gulp.task('serve:dist', ['default'], function () {
     //       will present a certificate warning in the browser.
     // https: true,
     server: 'dist',
-    middleware: [ historyApiFallback() ]
+    middleware: [ historyApiFallback() ],
+    ghostMode: false
   });
 });
 
