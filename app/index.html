@@ -95,7 +95,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </firebase-collection>
                 <paper-material elevation="1" class="layout horizontal">
                   <div class="flex layout vertical">
-                    <paper-radio-group iron-select="noteChanged" label="Note" attr-for-selected="name" selected="{{selectedNote}}">
+                    <paper-radio-group on-iron-select="noteChanged" label="Note" attr-for-selected="name" selected="{{selectedNote}}">
                       <template is="dom-repeat" items="[[notes]]" as="note">
                         <paper-radio-button name="[[note.value]]">[[note.value]]</paper-radio-button>
                       </template>

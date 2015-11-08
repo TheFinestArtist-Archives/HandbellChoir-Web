@@ -26,13 +26,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   var ref = new Firebase("https://handbellchoir.firebaseio.com");
   ref.authAnonymously(function(error, authData) {
+    console.log(error, authData);
     app.uid = authData.uid;
   }, {
     remember: "sessionOnly"
   });
 
-  app.noteChanged = function(e1, e2) {
-    coonsole.log(e1, e2, app.uid);
+  app.noteChanged = function(e) {
+    if (app.pNote) {
+      var ref = new Firebase("https://handbellchoir.firebaseio.com/notes/" + MIDI.keyToNote[app.pNote] + "/o");
+      ref.remove();
+    }
+    var newNote = e.detail.item.name;
+    var ref = new Firebase("https://handbellchoir.firebaseio.com/notes/" + MIDI.keyToNote[newNote] + "/o");
+    ref.set(app.uid);
+    app.pNote = newNote;
   };
 
   // Main area's paper-scroll-header-panel custom condensing transformation of
