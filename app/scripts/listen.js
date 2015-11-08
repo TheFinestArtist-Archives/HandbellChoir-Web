@@ -15,15 +15,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
-  app.ringBell = function() {
-    if (app.selectedNote) {
-      Polymer.dom(document).querySelector('#firebase-plays').add({
-        n: app.selectedNote,
-        i: app.selectedInstrument,
-        t: {'.sv': 'timestamp'}
-      });
-    }
-  };
+  var notes = new Firebase("https://handbellchoir.firebaseio.com/config/notes");
+  notes.set(MIDI.noteToKey);
 
   var launchTime = new Date().getTime();
 
@@ -31,7 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   plays.on('child_added', function(play, prevChildKey) {
     var p = play.val();
     if (p.t > launchTime) {
-      console.log(p.t, p.n, p.i);
+      console.log(p.t, p.n);
       var delay = 0; // play one note every quarter second
       var note = MIDI.keyToNote[p.n]; // the MIDI note
       var velocity = 127; // how hard the note hits

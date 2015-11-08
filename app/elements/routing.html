@@ -25,8 +25,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page.base(window.location.pathname.replace(/\/$/, ''));
 
     // Routes
-    page('/listen', scrollToTop, function() {
-      app.route = 'listen';
+    page('/chooseNote', scrollToTop, function() {
+      app.route = 'choose-note';
     });
 
     page('/ringBell', scrollToTop, function() {
@@ -34,7 +34,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     });
 
     page('*', function() {
-      page.redirect('/listen');
+      page.redirect('/chooseNote');
     });
 
     // add #! before urls

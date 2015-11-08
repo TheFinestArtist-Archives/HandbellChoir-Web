@@ -49,14 +49,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </paper-toolbar>
 
           <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
-            <a data-route="listen" href="listen" on-tap="onDataRouteClick">
-              <iron-icon icon="track-changes"></iron-icon>
-              <span>Listen</span>
+            <a data-route="ring-bell" href="ringBell" on-tap="onDataRouteClick">
+              <iron-icon icon="av:play-circle-filled"></iron-icon>
+              <span>Ring Bell</span>
             </a>
 
-            <a data-route="ring-bell" href="ringBell" on-tap="onDataRouteClick">
-              <iron-icon icon="add"></iron-icon>
-              <span>Ring Bell</span>
+            <a data-route="choose-note" href="chooseNote" on-tap="onDataRouteClick">
+              <iron-icon icon="image:music-note"></iron-icon>
+              <span>Choose Note</span>
             </a>
           </paper-menu>
         </paper-scroll-header-panel>
@@ -74,53 +74,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <div class="content">
             <iron-pages attr-for-selected="data-route" selected="{{route}}">
-              <section data-route="listen">
-                <paper-material elevation="1">
-                  <h2 class="page-title">Listen</h2>
-
-                  <firebase-collection id="firebase-plays"
-                                       location="https://handbellchoir.firebaseio.com/plays"
-                                       data="{{plays}}">
-                  </firebase-collection>
-
-                  <template is="dom-repeat" items="[[plays]]" as="play">
-                    <div class="layout vertical">
-                      <paper-icon-item>
-                        <iron-icon src="[[play.icon]]" item-icon></iron-icon>
-                        <span>[[play.t]] [[play.n]] [[play.i]]</span>
-                      </paper-icon-item>
+              <section data-route="ring-bell">
+                <firebase-collection id="firebase-plays"
+                                     location="https://handbellchoir.firebaseio.com/plays"
+                                     data="{{plays}}">
+                </firebase-collection>
+                <paper-material elevation="1" class="layout vertical">
+                    <div>
+                      <paper-fab style="margin-left: auto; margin-right: auto;" on-tap="ringBell" icon="av:play-circle-filled">Ring Bell</paper-fab>
                     </div>
-                  </template>
+                    <paper-button data-route="choose-note" href="chooseNote" on-tap="onDataRouteClick">Note: [[selectedNote]]</paper-button>
                 </paper-material>
               </section>
 
-              <section data-route="ring-bell">
+              <section data-route="choose-note">
                 <firebase-collection location="https://handbellchoir.firebaseio.com/config/notes"
                                      data="{{notes}}">
                 </firebase-collection>
-                <firebase-collection location="https://handbellchoir.firebaseio.com/config/instruments"
-                                     data="{{instruments}}">
-                </firebase-collection>
                 <paper-material elevation="1" class="layout horizontal">
                   <div class="flex layout vertical">
-
                     <paper-radio-group label="Note" attr-for-selected="name" selected="{{selectedNote}}">
                       <template is="dom-repeat" items="[[notes]]" as="note">
                         <paper-radio-button name="[[note.value]]">[[note.value]]</paper-radio-button>
                       </template>
                     </paper-radio-group>
-                    <paper-dropdown-menu label="Instrument" selected-item-label="{{selectedInstrument}}">
-                      <paper-menu class="dropdown-content">
-                        <template is="dom-repeat" items="[[instruments]]" as="instrument">
-                          <paper-item>[[instrument.value]]</paper-item>
-                        </template>
-                      </paper-menu>
-                    </paper-dropdown-menu>
-
-                    <paper-button class="self-end" on-tap="ringBell">Ring Bell</paper-button>
                   </div>
                 </paper-material>
-              </section>
               </section>
             </iron-pages>
           </div>

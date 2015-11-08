@@ -19,7 +19,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     if (app.selectedNote) {
       Polymer.dom(document).querySelector('#firebase-plays').add({
         n: app.selectedNote,
-        i: app.selectedInstrument,
         t: {'.sv': 'timestamp'}
       });
     }
