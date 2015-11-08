@@ -104,18 +104,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <paper-material elevation="1" class="layout horizontal">
                   <div class="flex layout vertical">
 
-                    <paper-radio-group selected="c">
+                    <paper-radio-group label="Note" attr-for-selected="name" selected="{{selectedNote}}">
                       <template is="dom-repeat" items="[[notes]]" as="note">
                         <paper-radio-button name="[[note.value]]">[[note.value]]</paper-radio-button>
                       </template>
                     </paper-radio-group>
-                    <paper-dropdown-menu label="Note" selected-item-label="{{selectedNote}}">
-                      <paper-menu class="dropdown-content">
-                        <template is="dom-repeat" items="[[notes]]" as="note">
-                          <paper-item>[[note.value]]</paper-item>
-                        </template>
-                      </paper-menu>
-                    </paper-dropdown-menu>
                     <paper-dropdown-menu label="Instrument" selected-item-label="{{selectedInstrument}}">
                       <paper-menu class="dropdown-content">
                         <template is="dom-repeat" items="[[instruments]]" as="instrument">

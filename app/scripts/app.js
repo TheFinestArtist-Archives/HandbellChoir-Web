@@ -16,9 +16,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   var app = document.querySelector('#app');
 
   app.ringBell = function() {
-    if (app.selectedNote && app.selectedOctave) {
+    if (app.selectedNote) {
       Polymer.dom(document).querySelector('#firebase-plays').add({
-        n: app.selectedNote + app.selectedOctave,
+        n: app.selectedNote,
         i: app.selectedInstrument,
         t: {'.sv': 'timestamp'}
       });
