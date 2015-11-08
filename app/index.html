@@ -103,6 +103,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </firebase-collection>
                 <paper-material elevation="1" class="layout horizontal">
                   <div class="flex layout vertical">
+
+                    <paper-radio-group selected="c">
+                      <template is="dom-repeat" items="[[notes]]" as="note">
+                        <paper-radio-button name="[[note.value]]">[[note.value]]</paper-radio-button>
+                      </template>
+                    </paper-radio-group>
                     <paper-dropdown-menu label="Note" selected-item-label="{{selectedNote}}">
                       <paper-menu class="dropdown-content">
                         <template is="dom-repeat" items="[[notes]]" as="note">
