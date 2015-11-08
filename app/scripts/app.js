@@ -39,7 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     var newNote = e.detail.item.name;
     var ref = new Firebase("https://handbellchoir.firebaseio.com/notes/" + MIDI.keyToNote[newNote] + "/o");
-    ref.set(app.uid);
+    ref.set("X");
     app.pNote = newNote;
   };
 
