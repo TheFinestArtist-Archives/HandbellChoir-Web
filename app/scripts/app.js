@@ -33,7 +33,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     if (p.t > launchTime) {
       console.log(p.t, p.n, p.i);
       var delay = 0; // play one note every quarter second
-      var note = NotesUtil.nameToNum(p.n); // the MIDI note
+      var note = MIDI.keyToNote[p.n]; // the MIDI note
       var velocity = 127; // how hard the note hits
       MIDI.noteOn(0, note, velocity, delay);
       MIDI.noteOff(0, note, delay + 0.75);
