@@ -98,9 +98,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <firebase-collection location="https://handbellchoir.firebaseio.com/config/notes"
                                      data="{{notes}}">
                 </firebase-collection>
-                <firebase-collection location="https://handbellchoir.firebaseio.com/config/octaves"
-                                     data="{{octaves}}">
-                </firebase-collection>
                 <firebase-collection location="https://handbellchoir.firebaseio.com/config/instruments"
                                      data="{{instruments}}">
                 </firebase-collection>
@@ -110,13 +107,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       <paper-menu class="dropdown-content">
                         <template is="dom-repeat" items="[[notes]]" as="note">
                           <paper-item>[[note.value]]</paper-item>
-                        </template>
-                      </paper-menu>
-                    </paper-dropdown-menu>
-                    <paper-dropdown-menu label="Octave" selected-item-label="{{selectedOctave}}">
-                      <paper-menu class="dropdown-content">
-                        <template is="dom-repeat" items="[[octaves]]" as="octave">
-                          <paper-item>[[octave.value]]</paper-item>
                         </template>
                       </paper-menu>
                     </paper-dropdown-menu>
@@ -147,7 +137,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="bower_components/MIDI.js/inc/shim/Base64.js" type="text/javascript"></script>
     <script src="bower_components/MIDI.js/inc/shim/Base64binary.js" type="text/javascript"></script>
     <script src="bower_components/MIDI.js/inc/shim/WebAudioAPI.js" type="text/javascript"></script>
-    <script src="scripts/notesUtil.js"></script>
     <script src="scripts/app.js"></script>
     <!-- endbuild-->
   </body>
