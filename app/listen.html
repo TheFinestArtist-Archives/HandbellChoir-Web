@@ -42,23 +42,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <body unresolved class="fullbleed layout vertical">
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
-      <paper-drawer-panel id="paperDrawerPanel">
-        <paper-scroll-header-panel drawer fixed>
-          <paper-toolbar id="drawerToolbar">
-            <span class="paper-font-title">Menu</span>
-          </paper-toolbar>
-          <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
-            <a data-route="listen" href="listen" on-tap="onDataRouteClick">
-              <iron-icon icon="track-changes"></iron-icon>
-              <span>Listen</span>
-            </a>
-          </paper-menu>
-        </paper-scroll-header-panel>
-
-        <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
           <paper-toolbar id="mainToolbar" class="tall">
-            <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-            <div class="middle middle-container center horizontal layout">
+            <div class="top top center horizontal layout">
               <div class="app-name">Handbell Choir Hero</div>
             </div>
             <div class="bottom bottom-container center horizontal layout">
@@ -88,7 +73,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </iron-pages>
           </div>
         </paper-scroll-header-panel>
-      </paper-drawer-panel>
 
       <paper-toast id="toast">
         <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>

@@ -18,6 +18,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   var notes = new Firebase("https://handbellchoir.firebaseio.com/config/notes");
   notes.set(MIDI.noteToKey);
 
+  var notesClaimO = {};
+  for(var i = 21; i <= 108; i++) {
+    notesClaimO[i] = {
+      key: MIDI.noteToKey[i]
+    };
+  }
+  var notesClaim = new Firebase("https://handbellchoir.firebaseio.com/notes");
+  notesClaim.set(notesClaimO);
+
   var launchTime = new Date().getTime();
 
   var plays = new Firebase("https://handbellchoir.firebaseio.com/plays");
