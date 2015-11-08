@@ -1,0 +1,142 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="A virtual handbell choir, powered by Firebase!">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Polymer Starter Kit"/>
+    <title>Handbell Choir Hero</title>
+    <meta name="theme-color" content="#2E3AA1">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild-->
+
+    <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <!-- endbuild -->
+
+    <!-- will be replaced with elements/elements.vulcanized.html -->
+    <link rel="import" href="elements/elements.html">
+    <!-- endreplace-->
+
+    <!-- build:js bower_components/MIDI.js/build/MIDI.min.js -->
+    <script src="bower_components/MIDI.js/build/MIDI.js"></script>
+    <!-- endbuild -->
+
+    <!-- For shared styles, shared-styles.html import in elements.html -->
+    <style is="custom-style" include="shared-styles"></style>
+  </head>
+
+  <body unresolved class="fullbleed layout vertical">
+    <span id="browser-sync-binding"></span>
+    <template is="dom-bind" id="app">
+      <paper-drawer-panel id="paperDrawerPanel">
+        <paper-scroll-header-panel drawer fixed>
+          <paper-toolbar id="drawerToolbar">
+            <span class="paper-font-title">Menu</span>
+          </paper-toolbar>
+
+          <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
+            <a data-route="listen" href="listen" on-tap="onDataRouteClick">
+              <iron-icon icon="track-changes"></iron-icon>
+              <span>Listen</span>
+            </a>
+
+            <a data-route="ring-bell" href="ringBell" on-tap="onDataRouteClick">
+              <iron-icon icon="add"></iron-icon>
+              <span>Ring Bell</span>
+            </a>
+          </paper-menu>
+        </paper-scroll-header-panel>
+
+        <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+          <paper-toolbar id="mainToolbar" class="tall">
+            <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+            <div class="middle middle-container center horizontal layout">
+              <div class="app-name">Handbell Choir Hero</div>
+            </div>
+            <div class="bottom bottom-container center horizontal layout">
+              <div class="bottom-title paper-font-subhead">Like a handbell choir, but with Firebase.</div>
+            </div>
+          </paper-toolbar>
+
+          <div class="content">
+            <iron-pages attr-for-selected="data-route" selected="{{route}}">
+              <section data-route="listen">
+                <paper-material elevation="1">
+                  <h2 class="page-title">Listen</h2>
+
+                  <firebase-collection id="firebase-plays"
+                                       location="https://handbellchoir.firebaseio.com/plays"
+                                       data="{{plays}}">
+                  </firebase-collection>
+
+                  <template is="dom-repeat" items="[[plays]]" as="play">
+                    <div class="layout vertical">
+                      <paper-icon-item>
+                        <iron-icon src="[[play.icon]]" item-icon></iron-icon>
+                        <span>[[play.t]] [[play.n]] [[play.i]]</span>
+                      </paper-icon-item>
+                    </div>
+                  </template>
+                </paper-material>
+              </section>
+
+              <section data-route="ring-bell">
+                <firebase-collection location="https://handbellchoir.firebaseio.com/config/notes"
+                                     data="{{notes}}">
+                </firebase-collection>
+                <firebase-collection location="https://handbellchoir.firebaseio.com/config/instruments"
+                                     data="{{instruments}}">
+                </firebase-collection>
+                <paper-material elevation="1" class="layout horizontal">
+                  <div class="flex layout vertical">
+
+                    <paper-radio-group label="Note" attr-for-selected="name" selected="{{selectedNote}}">
+                      <template is="dom-repeat" items="[[notes]]" as="note">
+                        <paper-radio-button name="[[note.value]]">[[note.value]]</paper-radio-button>
+                      </template>
+                    </paper-radio-group>
+                    <paper-dropdown-menu label="Instrument" selected-item-label="{{selectedInstrument}}">
+                      <paper-menu class="dropdown-content">
+                        <template is="dom-repeat" items="[[instruments]]" as="instrument">
+                          <paper-item>[[instrument.value]]</paper-item>
+                        </template>
+                      </paper-menu>
+                    </paper-dropdown-menu>
+
+                    <paper-button class="self-end" on-tap="ringBell">Ring Bell</paper-button>
+                  </div>
+                </paper-material>
+              </section>
+              </section>
+            </iron-pages>
+          </div>
+        </paper-scroll-header-panel>
+      </paper-drawer-panel>
+
+      <paper-toast id="toast">
+        <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+      </paper-toast>
+    </template>
+
+    <!-- build:js scripts/app.js -->
+    <script src="bower_components/MIDI.js/inc/shim/Base64.js" type="text/javascript"></script>
+    <script src="bower_components/MIDI.js/inc/shim/Base64binary.js" type="text/javascript"></script>
+    <script src="bower_components/MIDI.js/inc/shim/WebAudioAPI.js" type="text/javascript"></script>
+    <script src="scripts/app.js"></script>
+    <!-- endbuild-->
+  </body>
+</html>
