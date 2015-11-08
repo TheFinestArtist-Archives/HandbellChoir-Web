@@ -32,6 +32,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var p = play.val();
     if (p.t > launchTime) {
       console.log(p.t, p.n, p.i);
+      var delay = 0; // play one note every quarter second
+      var note = NotesUtil.nameToNum(p.n); // the MIDI note
+      var velocity = 127; // how hard the note hits
+      MIDI.noteOn(0, note, velocity, delay);
+      MIDI.noteOff(0, note, delay + 0.75);
+    } else {
+      play.ref().remove();
     }
   });
 
@@ -72,5 +79,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.scrollPageToTop = function() {
     app.$.headerPanelMain.scrollToTop(true);
   };
+
+  MIDI.loadPlugin({
+    //soundfontUrl: "bower_components/MIDI.js Soundfonts/FluidR3_GM/",
+    instrument: "acoustic_grand_piano",
+    soundfontUrl: "bower_components/MIDI.js Soundfonts/FluidR3_GM/",
+    //instrument: "acoustic_guitar_steel",
+    onprogress: function(state, progress) {
+      console.log(state, progress);
+    },
+    onsuccess: function() {
+      MIDI.setVolume(0, 127);
+    }
+  });
 
 })(document);
