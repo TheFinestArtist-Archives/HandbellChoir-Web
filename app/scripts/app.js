@@ -80,16 +80,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     app.$.headerPanelMain.scrollToTop(true);
   };
 
+  var instrumentName = "tubular_bells";//"acoustic_guitar_steel";//"acoustic_grand_piano";
+
   MIDI.loadPlugin({
-    //soundfontUrl: "bower_components/MIDI.js Soundfonts/FluidR3_GM/",
-    instrument: "acoustic_grand_piano",
     soundfontUrl: "bower_components/MIDI.js Soundfonts/FluidR3_GM/",
-    //instrument: "acoustic_guitar_steel",
+    instrument: instrumentName,
     onprogress: function(state, progress) {
       console.log(state, progress);
     },
     onsuccess: function() {
       MIDI.setVolume(0, 127);
+      MIDI.programChange(0, MIDI.GM.byName[instrumentName].number);
     }
   });
 
